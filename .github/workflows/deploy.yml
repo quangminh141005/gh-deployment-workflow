@@ -1,0 +1,27 @@
+name: Deploy to Github Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+
+jobs:
+  deploys:
+    runs-on: ubuntu-lastest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages # set env variables, permission, etc
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact # package into  a zip file used for deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "." # root folder
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@4
